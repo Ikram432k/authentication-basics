@@ -67,6 +67,7 @@ app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     next();
   });
+//view for sign-up page and login page
 app.get("/", (req, res) => {
     res.render("index", { user: req.user });
   });
