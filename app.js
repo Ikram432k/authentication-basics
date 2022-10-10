@@ -1,4 +1,7 @@
 const express = require("express");
+const dotenv = require("dotenv");
+// dotenv.config;
+
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
@@ -7,7 +10,14 @@ const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const mongoDb = "mongodb+srv://auth-basics:auth-basics@cluster0.6zitcth.mongodb.net/?retryWrites=true&w=majority";
+const result = dotenv.config()
+
+if (result.error) {
+  throw result.error
+}
+
+console.log(result.parsed.key)
+const mongoDb = result.parsed.key;
 mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
